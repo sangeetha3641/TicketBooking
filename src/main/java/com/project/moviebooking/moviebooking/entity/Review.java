@@ -12,7 +12,6 @@ public class Review {
 	private int ReviewId;
 	private String review;
 	private int rating;
-
 	public int getReviewId() {
 		return ReviewId;
 	}
@@ -25,16 +24,16 @@ public class Review {
 	public void setReview(String review) {
 		this.review = review;
 	}
+	@Override
+	public String toString() {
+		return "Review [ReviewId=" + ReviewId + ", review=" + review + ", rating=" + rating + "]";
+	}
 	public int getRating() {
 		return rating;
 	}
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	@Override
-	public String toString() {
-		return "Review [ReviewId=" + ReviewId + ", review=" + review + ", rating=" + rating + "]";
-	}
-	
 
+	
 }

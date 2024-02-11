@@ -1,5 +1,6 @@
 package com.project.moviebooking.moviebooking.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +16,7 @@ public class TheatreAdmin {
 	private String TheatreAdminname;
 	private String TheatreAdminemail;
 	private String TheatreAdminpassword;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Theatre theatre;
 	
 	public int getTheatreAdminid() {

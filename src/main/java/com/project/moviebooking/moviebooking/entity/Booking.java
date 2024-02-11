@@ -4,8 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 @Entity
 public class Booking {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int Bookingid;
+	
 	private String MovieName;
 	private LocalDate Showdate;
 	private LocalTime showtime;
@@ -35,10 +42,17 @@ public class Booking {
 	public void setTotalamount(int totalamount) {
 		Totalamount = totalamount;
 	}
+	public int getBookingid() {
+		return Bookingid;
+	}
+	public void setBookingid(int bookingid) {
+		Bookingid = bookingid;
+	}
 	@Override
 	public String toString() {
-		return "Booking [MovieName=" + MovieName + ", Showdate=" + Showdate + ", showtime=" + showtime
-				+ ", Totalamount=" + Totalamount + "]";
+		return "Booking [Bookingid=" + Bookingid + ", MovieName=" + MovieName + ", Showdate=" + Showdate + ", showtime="
+				+ showtime + ", Totalamount=" + Totalamount + "]";
 	}
+	
 	
 }

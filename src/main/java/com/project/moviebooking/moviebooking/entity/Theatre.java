@@ -12,6 +12,15 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Theatre {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int Theatreid;
+	public int getTheatreid() {
+		return Theatreid;
+	}
+	public void setTheatreid(int theatreid) {
+		Theatreid = theatreid;
+	}
 	private String TheatreLocation;
 	private String  TheatreName;
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -32,8 +41,10 @@ public class Theatre {
 	}
 	@Override
 	public String toString() {
-		return "Theatre [TheatreLocation=" + TheatreLocation + ", TheatreName=" + TheatreName + "]";
+		return "Theatre [Theatreid=" + Theatreid + ", TheatreLocation=" + TheatreLocation + ", TheatreName="
+				+ TheatreName + ", theatreadmin=" + theatreadmin + ", screen=" + screen + "]";
 	}
+	
 
 	
 	
