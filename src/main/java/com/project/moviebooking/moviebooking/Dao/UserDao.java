@@ -2,9 +2,11 @@ package com.project.moviebooking.moviebooking.Dao;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import com.project.moviebooking.moviebooking.entity.User;
 import com.project.moviebooking.moviebooking.repo.UserRepo;
-
+@Repository
 public class UserDao {
 	UserRepo Userrepo;
 	public User saveuser(User user) {

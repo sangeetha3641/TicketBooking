@@ -2,9 +2,11 @@ package com.project.moviebooking.moviebooking.Dao;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import com.project.moviebooking.moviebooking.entity.Screen;
 import com.project.moviebooking.moviebooking.repo.ScreenRepo;
-
+@Repository
 public class ScreenDao {
 	ScreenRepo screenrepo;
 	public Screen saveScreen(Screen screen) {

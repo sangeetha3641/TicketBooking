@@ -2,9 +2,11 @@ package com.project.moviebooking.moviebooking.Dao;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import com.project.moviebooking.moviebooking.entity.Booking;
 import com.project.moviebooking.moviebooking.repo.Bookingrepo;
-
+@Repository
 public class BookingDao {
 	Bookingrepo bookingrepo;
 	public Booking savebooking(Booking booking) {

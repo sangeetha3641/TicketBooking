@@ -2,10 +2,12 @@ package com.project.moviebooking.moviebooking.Dao;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Repository;
+
 import com.project.moviebooking.moviebooking.entity.Theatre;
 
 import com.project.moviebooking.moviebooking.repo.TheatreRepo;
-
+@Repository
 public class TheatreDao {
 	TheatreRepo theatrerepo;
 	public Theatre savetheatre(Theatre theatre) {

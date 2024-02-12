@@ -29,15 +29,14 @@ public class ReviewDao {
 			return null;
 		}
    public Review updatereview(Review m,int reviewid) {
-	   Review m=findreview(reviewid);
-	   if(m!=null) {
-		   m.setReviewId(reviewid);;
-		   reviewrepo.save(m);
+	   Review m1=findreview(reviewid);
+	   if(m1!=null) {
+		   m1.setReviewId(reviewid);;
+		   reviewrepo.save(m1);
 	   }
 	   return null;
    }
 	   
 		
 	}
-}
 	
