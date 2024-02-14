@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -17,8 +18,10 @@ public class User {
 	private String Username;
 	private String usermail;
 	private String userpassword;
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)//reationship with review
 	private List<Booking> booking;
+	@OneToOne
+	private Review review;
 	public int getUserid() {
 		return Userid;
 	}

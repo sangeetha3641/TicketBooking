@@ -3,10 +3,13 @@ package com.project.moviebooking.moviebooking.entity;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 @Entity
+@Component
 public class Screen {
 	private int ScreenNumber;
 	private LocalTime ShowTime;
