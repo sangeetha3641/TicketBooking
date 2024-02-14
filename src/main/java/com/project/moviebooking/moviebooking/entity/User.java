@@ -22,6 +22,12 @@ public class User {
 	private List<Booking> booking;
 	@OneToOne
 	private Review review;
+	public Review getReview() {
+		return review;
+	}
+	public void setReview(Review review) {
+		this.review = review;
+	}
 	public int getUserid() {
 		return Userid;
 	}
@@ -49,7 +55,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [Userid=" + Userid + ", Username=" + Username + ", usermail=" + usermail + ", userpassword="
-				+ userpassword + "]";
+				+ userpassword + ", booking=" + booking + ", review=" + review + "]";
 	}
-
+	
 }

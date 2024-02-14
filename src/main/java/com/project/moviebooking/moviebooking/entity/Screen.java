@@ -14,7 +14,8 @@ public class Screen {
 	private int ScreenNumber;
 	private LocalTime ShowTime;
 	private LocalDate ShowDate;
-	private Status s;
+	private int seats;
+	private Status s;//add no of seats
 	@OneToOne
 	private Movie movie;
 	
@@ -46,11 +47,18 @@ public class Screen {
 	public void setS(Status s) {
 		this.s = s;
 	}
+	public int getSeats() {
+		return seats;
+	}
+	public void setSeats(int seats) {
+		this.seats = seats;
+	}
 	@Override
 	public String toString() {
-		return "Screen [ScreenNumber=" + ScreenNumber + ", ShowTime=" + ShowTime + ", ShowDate=" + ShowDate + ", s=" + s
-				+ ", movie=" + movie + "]";
+		return "Screen [ScreenNumber=" + ScreenNumber + ", ShowTime=" + ShowTime + ", ShowDate=" + ShowDate + ", seats="
+				+ seats + ", s=" + s + ", movie=" + movie + "]";
 	}
+	
 	
 	
 	
