@@ -2,6 +2,7 @@ package com.project.moviebooking.moviebooking.entity;
 
 import org.springframework.stereotype.Component;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,14 +13,14 @@ import jakarta.persistence.Id;
 public class Review {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int ReviewId;
+	private int reviewId;
 	private String review;
 	private int rating;
 	public int getReviewId() {
-		return ReviewId;
+		return reviewId;
 	}
 	public void setReviewId(int reviewId) {
-		ReviewId = reviewId;
+		reviewId = reviewId;
 	}
 	public String getReview() {
 		return review;
@@ -29,7 +30,7 @@ public class Review {
 	}
 	@Override
 	public String toString() {
-		return "Review [ReviewId=" + ReviewId + ", review=" + review + ", rating=" + rating + "]";
+		return "Review [ReviewId=" + reviewId + ", review=" + review + ", rating=" + rating + "]";
 	}
 	public int getRating() {
 		return rating;

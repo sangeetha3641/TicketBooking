@@ -1,6 +1,7 @@
 package com.project.moviebooking.moviebooking.Service;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -8,10 +9,12 @@ import org.springframework.stereotype.Service;
 import com.project.moviebooking.moviebooking.Dao.MovieDao;
 import com.project.moviebooking.moviebooking.Dto.MovieDto;
 import com.project.moviebooking.moviebooking.entity.Movie;
+import com.project.moviebooking.moviebooking.exceptionhandling.Movienotfound;
 import com.project.moviebooking.moviebooking.util.ResponseStructure;
 
 @Service
 public class MovieService {
+	@Autowired
 	MovieDao moviedao;
 	public ResponseEntity<ResponseStructure<MovieDto>>savemovie(Movie movie){
 		MovieDto mdto=new MovieDto();
@@ -24,7 +27,7 @@ public class MovieService {
 			rs.setData(mdto);
 			return new  ResponseEntity<ResponseStructure<MovieDto>>(rs,HttpStatus.CREATED);
 		}
-		return null;
+		throw new Movienotfound("no student found");
 			
 		}
 	public ResponseEntity<ResponseStructure<MovieDto>>findmovie(int  movieid){
@@ -38,7 +41,7 @@ public class MovieService {
 			rs.setData(mdto);
 			return new  ResponseEntity<ResponseStructure<MovieDto>>(rs,HttpStatus.NOT_FOUND);
 		}
-		return null;
+		throw new Movienotfound("no student found");
 			
 		}
 	public ResponseEntity<ResponseStructure<MovieDto>>deletemovie(int  movieid){
@@ -52,7 +55,7 @@ public class MovieService {
 			rs.setData(mdto);
 			return new  ResponseEntity<ResponseStructure<MovieDto>>(rs,HttpStatus.NOT_FOUND);
 		}
-		return null;
+		throw new Movienotfound("no student found");
 			
 		}
 	public ResponseEntity<ResponseStructure<MovieDto>>updatemovie(Movie movie,int  movieid){
@@ -66,7 +69,7 @@ public class MovieService {
 			rs.setData(mdto);
 			return new  ResponseEntity<ResponseStructure<MovieDto>>(rs,HttpStatus.OK);
 		}
-		return null;
+		throw new Movienotfound("no student found");
 			
 	}
 }

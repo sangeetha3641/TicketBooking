@@ -1,5 +1,6 @@
 package com.project.moviebooking.moviebooking.Dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,16 @@ public class TheatreAdminDao {
 			}
 			return null;
 		}
-   public TheatreAdmin updatetheatre(TheatreAdmin m,int TheatreAdminId) {
+   public TheatreAdmin updatetheatreadmin(TheatreAdmin m,int TheatreAdminId) {
 	   TheatreAdmin m1=findtheatreadmin(TheatreAdminId);
 	   if(m1!=null) {
 		   m.setTheatreAdminid(TheatreAdminId);;
 		   threpo.save(m1);
 	   }
 	   return null;
+   }
+   public List<TheatreAdmin> findall(){
+	   return threpo.findAll();
    }
 	   
 		

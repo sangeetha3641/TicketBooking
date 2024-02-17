@@ -15,37 +15,42 @@ import jakarta.persistence.OneToMany;
 @Entity
 @Component
 public class Theatre {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int Theatreid;
+	private int theatreid;
+	private String theatreLocation;
+	private String  theatreName;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Movie> movie;
 	public int getTheatreid() {
-		return Theatreid;
+		return theatreid;
 	}
 	public void setTheatreid(int theatreid) {
-		Theatreid = theatreid;
+		this.theatreid = theatreid;
 	}
-	private String TheatreLocation;
-	private String  TheatreName;
-	@ManyToOne(cascade = CascadeType.ALL)
-	private TheatreAdmin theatreadmin;
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Screen>screen;
 	public String getTheatreLocation() {
-		return TheatreLocation;
+		return theatreLocation;
 	}
 	public void setTheatreLocation(String theatreLocation) {
-		TheatreLocation = theatreLocation;
+		this.theatreLocation = theatreLocation;
 	}
 	public String getTheatreName() {
-		return TheatreName;
+		return theatreName;
 	}
 	public void setTheatreName(String theatreName) {
-		TheatreName = theatreName;
+		this.theatreName = theatreName;
+	}
+	public List<Movie> getMovie() {
+		return movie;
+	}
+	public void setMovie(List<Movie> movie) {
+		this.movie = movie;
 	}
 	@Override
 	public String toString() {
-		return "Theatre [Theatreid=" + Theatreid + ", TheatreLocation=" + TheatreLocation + ", TheatreName="
-				+ TheatreName + ", theatreadmin=" + theatreadmin + ", screen=" + screen + "]";
+		return "Theatre [theatreid=" + theatreid + ", theatreLocation=" + theatreLocation + ", theatreName="
+				+ theatreName + ", movie=" + movie + "]";
 	}
 	
 

@@ -1,13 +1,16 @@
 package com.project.moviebooking.moviebooking.Dao;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.moviebooking.moviebooking.entity.Admin;
 import com.project.moviebooking.moviebooking.repo.AdminRepo;
 @Repository
 public class AdminDao {
+	@Autowired
 	AdminRepo adminrepo;
 	public Admin saveadmin(Admin Admin) {
 		return adminrepo.save(Admin);
@@ -44,5 +47,12 @@ public class AdminDao {
 		return null;
 		
 	}
-
-}
+//	public Admin findbyemail(String adminemail) {
+//		return adminrepo.findbyemail(adminemail);
+//	}
+    public List<Admin>findall() {  
+    	return adminrepo.findAll();
+    }
+    }
+		
+		

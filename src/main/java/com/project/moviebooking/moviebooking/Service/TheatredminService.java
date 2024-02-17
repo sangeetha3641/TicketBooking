@@ -1,18 +1,27 @@
 package com.project.moviebooking.moviebooking.Service;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.project.moviebooking.moviebooking.Dao.TheatreAdminDao;
+import com.project.moviebooking.moviebooking.Dao.TheatreDao;
 import com.project.moviebooking.moviebooking.Dto.TheatreAdminDto;
+import com.project.moviebooking.moviebooking.entity.Theatre;
 import com.project.moviebooking.moviebooking.entity.TheatreAdmin;
+import com.project.moviebooking.moviebooking.exceptionhandling.TheatreAdminNotFound;
+import com.project.moviebooking.moviebooking.exceptionhandling.TheatreNotFound;
 import com.project.moviebooking.moviebooking.util.ResponseStructure;
 
 @Service
 public class TheatredminService {
+	@Autowired
 	TheatreAdminDao thdao;
 	public ResponseEntity<ResponseStructure<TheatreAdminDto>>savetheatreadmin(TheatreAdmin th){
 		TheatreAdminDto thdto=new TheatreAdminDto();
@@ -25,7 +34,7 @@ public class TheatredminService {
 			structure.setData(thdto);
 			return  new ResponseEntity<ResponseStructure<TheatreAdminDto>>(structure,HttpStatus.CREATED);
 		}
-		return null;
+		throw new TheatreAdminNotFound("no student found");
 		
 		
 	}
@@ -40,7 +49,7 @@ public class TheatredminService {
 			structure.setData(thdto);
 			return  new ResponseEntity<ResponseStructure<TheatreAdminDto>>(structure,HttpStatus.NO_CONTENT);
 		}
-		return null;
+		throw new TheatreAdminNotFound("no student found");
 	}
 	public ResponseEntity<ResponseStructure<TheatreAdminDto>>deletetheatreadmin(int theatreadminid){
 		TheatreAdminDto thdto=new TheatreAdminDto();
@@ -53,21 +62,56 @@ public class TheatredminService {
 			structure.setData(thdto);
 			return  new ResponseEntity<ResponseStructure<TheatreAdminDto>>(structure,HttpStatus.NO_CONTENT);
 		}
-		return null;
+		throw new TheatreAdminNotFound("no student found");
 	}
 	public ResponseEntity<ResponseStructure<TheatreAdminDto>>updatetheatreadmin(TheatreAdmin th,int theatreadminid){
 		TheatreAdminDto thdto=new TheatreAdminDto();
 		ModelMapper m=new ModelMapper();
 		ResponseStructure<TheatreAdminDto>structure=new ResponseStructure<TheatreAdminDto>();
-		m.map(thdao.updatetheatre(th, theatreadminid),thdto );
+		m.map(thdao.updatetheatreadmin(th, theatreadminid),thdto);
 		if(thdto!=null) {
-			structure.setMessage("delete theatreadmin successfully");
+			structure.setMessage("update theatreadmin successfully");
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setData(thdto);
 			return  new ResponseEntity<ResponseStructure<TheatreAdminDto>>(structure,HttpStatus.OK);
 		}
-		return null;
+		throw new TheatreAdminNotFound("no student found");
 	}
+	public ResponseEntity<ResponseStructure<TheatreAdminDto>> assignTheatreToTheatreAdmin(int theatreAdminId,int theatreId){
+		TheatreAdminDto thdto=new TheatreAdminDto();
+		TheatreDao tdao=new TheatreDao();
+		ModelMapper mapper=new ModelMapper();
+		TheatreAdmin tAdmin=thdao.findtheatreadmin(theatreAdminId);
+		Theatre theatre= tdao.findtheatre(theatreId);
+		if(tAdmin != null) {
+			if(theatre != null) {
+				tAdmin.setTheatre(theatre);
+				mapper.map(thdao.updatetheatreadmin(tAdmin, theatreAdminId),thdto);
+				ResponseStructure<TheatreAdminDto> structure=new ResponseStructure<TheatreAdminDto>();
+				structure.setMessage("assign theatre to Theatre Admin success");
+				structure.setStatus(HttpStatus .OK.value());
+				structure.setData(thdto);
+				return new ResponseEntity<ResponseStructure<TheatreAdminDto>>(structure,HttpStatus.OK);
+			}
+			else {
+				throw new TheatreNotFound("theatre not assigned to the theatre admin because,theatre not found for the given id");
+			}
+			
+		}
+		throw new TheatreAdminNotFound("we can't assign theatre to theatre admin because,theatre Admin not found for the given id");
+	}
+	public ResponseEntity<ResponseStructure<TheatreAdmin>>theatreadminlogin(String theatreadminemail,String theatreadminpassword){
+		List<TheatreAdmin> theatreAdmin=thdao.findall();
+		for(TheatreAdmin theatreAdmin2:theatreAdmin) {
+			if(theatreAdmin2.getTheatreAdminemail().equals(theatreadminemail))
+			{
+				if(theatreAdmin2.getTheatreAdminpassword().equals(theatreadminpassword)) {
+					ResponseStructure<Theatre>
+				}
+			}
+		}
+	}
+
 }
 	
 		

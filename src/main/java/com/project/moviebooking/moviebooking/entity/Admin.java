@@ -10,29 +10,43 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Component
 public class Admin {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int AdminId;
-	private String AdminEmail;
+	@NotNull
+	@NotBlank
+	private int adminId;
+	@NotNull(message="admin emailcannot be null")
+	@NotBlank(message="admin email cannot be blank")
+	@Email(message="enter a valid email address")
+	private String adminEmail;
+	@NotNull(message="password cannot be null")
+	@NotBlank(message="password cannot be null")
+	@Size(min=8,message="password must be atleast 8 characters")
+	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$",
+	         message="password must be atleast 1 digit,1 uppercase,1 lowercase and 1 special character")
 	private String password;
 	@OneToMany(cascade = CascadeType.ALL)
 	List<Theatre>theatre;
-	
 	public int getAdminId() {
-		return AdminId;
+		return adminId;
 	}
 	public void setAdminId(int adminId) {
-		AdminId = adminId;
+		this.adminId = adminId;
 	}
 	public String getAdminEmail() {
-		return AdminEmail;
+		return adminEmail;
 	}
 	public void setAdminEmail(String adminEmail) {
-		AdminEmail = adminEmail;
+		this.adminEmail = adminEmail;
 	}
 	public String getPassword() {
 		return password;
@@ -40,6 +54,14 @@ public class Admin {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public List<Theatre> getTheatre() {
+		return theatre;
+	}
+	public void setTheatre(List<Theatre> theatre) {
+		this.theatre = theatre;
+	}
+	
+	
 	
 
 }

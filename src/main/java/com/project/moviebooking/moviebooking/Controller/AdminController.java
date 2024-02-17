@@ -1,5 +1,7 @@
 package com.project.moviebooking.moviebooking.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,6 +24,7 @@ public class AdminController {
 	AdminService adminservice;
 	@PostMapping
    public ResponseEntity<ResponseStructure<AdminDto>> saveadmin(@RequestBody Admin  admin){
+		System.out.println("save admin");
 	   return adminservice.saveadmin(admin);
    }
 	@GetMapping
@@ -37,5 +40,12 @@ public class AdminController {
    public ResponseEntity<ResponseStructure<AdminDto>> updateadmin(@RequestBody Admin admin, @RequestParam int  adminid){
 	   return adminservice.updateadmin(admin, adminid);
    }
+	public ResponseEntity<ResponseStructure<AdminDto>>assigntheatretoadmin(@RequestParam int  adminId,@RequestParam List<Integer> theatreIds){
+		return adminservice.assignTheatresToAdmin(adminId, theatreIds);
+		
+	}
+	public ResponseEntity<ResponseStructure<Admin>>adminlogin(String adminemail,String adminpassword){
+		return adminservice.adminlogin(adminemail, adminpassword);
+	}
 
 }

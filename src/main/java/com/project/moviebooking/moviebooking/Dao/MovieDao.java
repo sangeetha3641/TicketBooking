@@ -2,6 +2,7 @@ package com.project.moviebooking.moviebooking.Dao;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.moviebooking.moviebooking.entity.Movie;
@@ -9,6 +10,7 @@ import com.project.moviebooking.moviebooking.repo.MovieRepo;
 
 @Repository
 public class MovieDao {
+	@Autowired
 	
 	
 		MovieRepo movierepo;
