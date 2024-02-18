@@ -101,6 +101,28 @@ public ResponseEntity<ResponseStructure<List<User>>>  findAllUser(List<User> use
 		}
 		throw new UserNotFound("no list found");
 		}
+public ResponseEntity<ResponseStructure<UserDto>> findByEmail(String userEmail,String userPassword){
+	UserDto uDto=new UserDto();
+	ModelMapper mapper=new ModelMapper();
+	User user=userdao.findbyemail(userEmail);
+	System.out.println(user);
+	if(user.getUsermail().equals(userEmail)) {
+		if(user.getUserpassword().equals(userPassword)) {
+	mapper.map(user, uDto);
+	ResponseStructure<UserDto> structure=new ResponseStructure<UserDto>();
+	structure.setMessage("User login success");
+	structure.setStatus(HttpStatus .FOUND.value());
+	structure.setData(uDto);
+	return new ResponseEntity<ResponseStructure<UserDto>> (structure,HttpStatus.FOUND);
+		}
+		else {
+			throw new UserNotFound(" your password is wrong please provide correct deteils");
+		}
+	}
+		else {
+			throw new UserNotFound(" your email is wrong please provide correct deteils");
+		}
+}
 	
 	
 

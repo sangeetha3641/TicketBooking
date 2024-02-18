@@ -16,4 +16,9 @@ public class SeatNotFound  extends RuntimeException{
 		return "SeatNotFound [message=" + message + "]";
 	}
 
+	public SeatNotFound(String message) {
+		super();
+		this.message = message;
+	}
+
 }

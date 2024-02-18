@@ -1,5 +1,7 @@
 package com.project.moviebooking.moviebooking.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +65,13 @@ public class ReviewService {
 			//ResponseEntity<ResponseStructure<Review>>(structure,HttpStatus.CREATED);
 		}
 		 throw  new ReviewNotFound("review not found");
+	}
+	public ResponseEntity<ResponseStructure<List<Review>>> findAllReview() {
+		ResponseStructure<List<Review>> structure=new ResponseStructure<List<Review>>();
+		structure.setMessage("find all Review successfull");
+		structure.setStatus(HttpStatus .FOUND.value());
+		structure.setData(reviewdao.findall());
+		return new ResponseEntity<ResponseStructure<List<Review>>>(structure,HttpStatus.FOUND);
 	}
 }
 

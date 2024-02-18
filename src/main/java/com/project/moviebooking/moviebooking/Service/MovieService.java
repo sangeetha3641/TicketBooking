@@ -1,5 +1,8 @@
 package com.project.moviebooking.moviebooking.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,15 +10,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.project.moviebooking.moviebooking.Dao.MovieDao;
+import com.project.moviebooking.moviebooking.Dao.SeatDao;
+import com.project.moviebooking.moviebooking.Dto.AdminDto;
 import com.project.moviebooking.moviebooking.Dto.MovieDto;
 import com.project.moviebooking.moviebooking.entity.Movie;
+import com.project.moviebooking.moviebooking.entity.Review;
+import com.project.moviebooking.moviebooking.entity.Seat;
+import com.project.moviebooking.moviebooking.entity.SeatType;
+import com.project.moviebooking.moviebooking.exceptionhandling.AdminNotfound;
 import com.project.moviebooking.moviebooking.exceptionhandling.Movienotfound;
+import com.project.moviebooking.moviebooking.exceptionhandling.ReviewNotFound;
+import com.project.moviebooking.moviebooking.exceptionhandling.SeatNotFound;
+import com.project.moviebooking.moviebooking.repo.ReviewRepo;
 import com.project.moviebooking.moviebooking.util.ResponseStructure;
 
 @Service
 public class MovieService {
 	@Autowired
 	MovieDao moviedao;
+	@Autowired
+	ReviewRepo reviewrepo;
 	public ResponseEntity<ResponseStructure<MovieDto>>savemovie(Movie movie){
 		MovieDto mdto=new MovieDto();
 		ModelMapper mp=new ModelMapper();
@@ -72,6 +86,25 @@ public class MovieService {
 		throw new Movienotfound("no student found");
 			
 	}
-}
+	public ResponseEntity<ResponseStructure<MovieDto>>Assignreviewtomovie(int movieid,List<Integer> reviewid){
+		MovieDto mdto=new MovieDto();
+		ModelMapper m=new ModelMapper();
+		Movie m1=moviedao.findmovie(movieid);
+		if(m1!=null) {
+			List<Review>exreview=reviewrepo.findAllById(reviewid);
+			m1.setReview(exreview);
+			m.map(moviedao.updatemovie(m1, movieid), moviedao);
+			ResponseStructure<MovieDto> structure=new ResponseStructure<MovieDto>();
+			structure.setMessage("assign theatreAdmin to admin succesffuly");
+			structure.setStatus(HttpStatus .OK.value());
+			structure.setData(mdto);
+			return new ResponseEntity<ResponseStructure<MovieDto>>(structure,HttpStatus.OK);
+		}
+		throw new ReviewNotFound("we can't assign review to movie");
+	}
+		
+	}
+
+
 	
 

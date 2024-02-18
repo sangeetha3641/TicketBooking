@@ -34,6 +34,9 @@ public class UserDao {
 		}
 		return null;
 	}
+//	public User findbyemail(String useremail) {
+//		return Userrepo.findByEmail(useremail);
+//	}
 
 	
 }

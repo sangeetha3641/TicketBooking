@@ -2,7 +2,7 @@ package com.project.moviebooking.moviebooking.Service;
 
 import java.util.List;
 
-
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.project.moviebooking.moviebooking.Dao.TheatreDao;
 import com.project.moviebooking.moviebooking.entity.Movie;
+import com.project.moviebooking.moviebooking.entity.Screen;
 import com.project.moviebooking.moviebooking.entity.Theatre;
 import com.project.moviebooking.moviebooking.exceptionhandling.TheatreNotFound;
+import com.project.moviebooking.moviebooking.repo.ScreenRepo;
 import com.project.moviebooking.moviebooking.repo.TheatreRepo;
 import com.project.moviebooking.moviebooking.util.ResponseStructure;
 
@@ -20,6 +22,7 @@ public class TheatreService {
 	@Autowired
 	TheatreDao thdao;
 	TheatreRepo theatrerepo;
+	ScreenRepo screenrepo;
 	public ResponseEntity<ResponseStructure<Theatre>> savetheatre(Theatre theatre){
 		ResponseStructure <Theatre>structure=new ResponseStructure<Theatre>();
 		Theatre l=thdao.savetheatre(theatre);
@@ -74,6 +77,25 @@ public class TheatreService {
 		structure.setStatus(HttpStatus .FOUND.value());
 		structure.setData(theatrerepo.findAll());
 		return new ResponseEntity<ResponseStructure<List<Theatre>>>(structure,HttpStatus.FOUND);
+	}
+	public ResponseEntity<ResponseStructure<List<Theatre>>> assignscreentotheatre(int theatreid,List<Integer>screenid){
+		ResponseStructure<Theatre>structure=new ResponseStructure<Theatre>();
+		ModelMapper mapper=new ModelMapper();
+		Theatre theatre=thdao.findtheatre(theatreid);
+		if(theatre!=null) {
+			List<Screen>s=screenrepo.findAllById(screenid);
+			theatre.setScreen(s);
+			thdao.updatetheatre(theatre, theatreid);
+			structure.setMessage("screen assigned to theatres");
+			structure.setStatus(theatreid);
+			structure.setData(theatre);
+			return new ResponseEntity<ResponseStructure<List<Theatre>>>(HttpStatus.OK);
+			
+			
+			
+		}
+		return null;
+		
 	}
 
 }

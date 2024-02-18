@@ -10,36 +10,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.service.annotation.PutExchange;
 
-import com.project.moviebooking.moviebooking.Service.SeatService;
-import com.project.moviebooking.moviebooking.entity.Seat;
+import com.project.moviebooking.moviebooking.Service.TicketService;
+import com.project.moviebooking.moviebooking.entity.Ticket;
 import com.project.moviebooking.moviebooking.util.ResponseStructure;
 @RestController
-@RequestMapping("seat")
-public class SeatController {
+@RequestMapping("ticket")
+public class TicketController {
 	@Autowired
-	SeatService seatservice;
+	TicketService ticketservice;
 	@PostMapping
-	public ResponseEntity<ResponseStructure<Seat>>saveseat(@RequestBody Seat seat){
-		return seatservice.saveSeat(seat);
+	public ResponseEntity<ResponseStructure<Ticket>>saveticket(@RequestBody Ticket ticket){
+		return ticketservice.saveTicket(ticket);
 		
 	}
 	@GetMapping
-	public ResponseEntity<ResponseStructure<Seat>>findseat(@RequestParam int seatid){
-		return seatservice.findSeat(seatid);
+	public ResponseEntity<ResponseStructure<Ticket>>findticket( @RequestParam int ticketid){
+		return ticketservice.findTicket(ticketid);
 		
 	}
 	@DeleteMapping
-	public ResponseEntity<ResponseStructure<Seat>>deleteseat(@RequestParam int seatid){
-		return seatservice.deleteSeat(seatid);
-		
+	public ResponseEntity<ResponseStructure<Ticket>>deleteticket(@RequestParam int ticketid){
+		return ticketservice.deleteTicket(ticketid);
 	}
 	@PutMapping
-	public ResponseEntity<ResponseStructure<Seat>>updateseat(@RequestBody Seat seat,@RequestParam int seatid){
-		return seatservice.updateSeat(seat, seatid);
+	public ResponseEntity<ResponseStructure<Ticket>>updateticket(@RequestBody Ticket ticket,@RequestParam int ticketid){
+		return ticketservice.updateTicket(ticket, ticketid);
 	}
-	
 	
 
 }

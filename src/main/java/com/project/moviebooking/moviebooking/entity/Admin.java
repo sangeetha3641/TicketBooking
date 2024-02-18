@@ -21,9 +21,7 @@ import jakarta.validation.constraints.Size;
 public class Admin {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@NotNull
-	@NotBlank
-	private int adminId;
+    private int adminId;
 	@NotNull(message="admin emailcannot be null")
 	@NotBlank(message="admin email cannot be blank")
 	@Email(message="enter a valid email address")
@@ -35,7 +33,9 @@ public class Admin {
 	         message="password must be atleast 1 digit,1 uppercase,1 lowercase and 1 special character")
 	private String password;
 	@OneToMany(cascade = CascadeType.ALL)
-	List<Theatre>theatre;
+	private List<Theatre>theatre;
+	@OneToMany (cascade = CascadeType.ALL)
+	private List<TheatreAdmin>th;
 	public int getAdminId() {
 		return adminId;
 	}
@@ -60,6 +60,18 @@ public class Admin {
 	public void setTheatre(List<Theatre> theatre) {
 		this.theatre = theatre;
 	}
+	public List<TheatreAdmin> getTh() {
+		return th;
+	}
+	public void setTh(List<TheatreAdmin> th) {
+		this.th = th;
+	}
+	@Override
+	public String toString() {
+		return "Admin [adminId=" + adminId + ", adminEmail=" + adminEmail + ", password=" + password + ", theatre="
+				+ theatre + ", th=" + th + "]";
+	}
+	
 	
 	
 	

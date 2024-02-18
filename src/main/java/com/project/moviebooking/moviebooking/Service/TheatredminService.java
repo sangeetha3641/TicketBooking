@@ -102,14 +102,20 @@ public class TheatredminService {
 	}
 	public ResponseEntity<ResponseStructure<TheatreAdmin>>theatreadminlogin(String theatreadminemail,String theatreadminpassword){
 		List<TheatreAdmin> theatreAdmin=thdao.findall();
-		for(TheatreAdmin theatreAdmin2:theatreAdmin) {
-			if(theatreAdmin2.getTheatreAdminemail().equals(theatreadminemail))
+		for(TheatreAdmin tha:theatreAdmin) {
+			if(tha.getTheatreAdminemail().equals(theatreadminemail))
 			{
-				if(theatreAdmin2.getTheatreAdminpassword().equals(theatreadminpassword)) {
-					ResponseStructure<Theatre>
+				if(tha.getTheatreAdminpassword().equals(theatreadminpassword)) {
+					ResponseStructure<TheatreAdmin>Structure=new ResponseStructure<TheatreAdmin>() ;
+					Structure.setMessage("theatre admin login successfull");
+					Structure.setStatus(HttpStatus.FOUND.value());
+					return new ResponseEntity<ResponseStructure<TheatreAdmin>>(Structure,HttpStatus.FOUND);
 				}
+				throw new TheatreAdminNotFound("theatre admin login unsuceesfull");
+				
 			}
 		}
+		return null;
 	}
 
 }

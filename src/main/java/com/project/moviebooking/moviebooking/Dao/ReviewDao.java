@@ -1,5 +1,6 @@
 package com.project.moviebooking.moviebooking.Dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
@@ -35,6 +36,9 @@ public class ReviewDao {
 		   reviewrepo.save(m1);
 	   }
 	   return null;
+   }
+   public List<Review> findall() {
+	   return reviewrepo.findAll();
    }
 	   
 		

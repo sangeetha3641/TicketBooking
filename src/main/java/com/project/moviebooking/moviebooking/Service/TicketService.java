@@ -1,30 +1,33 @@
 package com.project.moviebooking.moviebooking.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.project.moviebooking.moviebooking.Dao.MovieDao;
+import com.project.moviebooking.moviebooking.Dao.ScreenDao;
 import com.project.moviebooking.moviebooking.Dao.SeatDao;
 import com.project.moviebooking.moviebooking.Dao.TicketDao;
+import com.project.moviebooking.moviebooking.entity.Movie;
+import com.project.moviebooking.moviebooking.entity.Payment;
+import com.project.moviebooking.moviebooking.entity.Seat;
+import com.project.moviebooking.moviebooking.entity.SeatType;
 import com.project.moviebooking.moviebooking.entity.Ticket;
 import com.project.moviebooking.moviebooking.repo.SeatRepo;
 import com.project.moviebooking.moviebooking.repo.UserRepo;
 import com.project.moviebooking.moviebooking.util.ResponseStructure;
-
+@Service
 public class TicketService {
-	@Autowired
-	UserRepo uDao;
 	@Autowired
 	TicketDao tDao;
 	@Autowired
-	SeatDao sDao;
+	ScreenService screenservice;
 	@Autowired
-	MovieService mService;
-	@Autowired
-	SeatRepo sRepo;
-	@Autowired
-	MovieDao mDao;
+	ScreenDao screendao;
 	public ResponseEntity<ResponseStructure<Ticket>> saveTicket(Ticket ticket) {
 		ResponseStructure<Ticket> structure=new ResponseStructure<Ticket>();
 		structure.setMessage("Ticket save success");
@@ -65,5 +68,6 @@ public class TicketService {
 		}
 		return null;
 	}
+
 
 }
